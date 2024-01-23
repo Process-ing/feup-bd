@@ -1,0 +1,12 @@
+INSERT INTO ChatRoom VALUES (1, 'slow', 10, 'ninja');
+INSERT INTO ChatRoom VALUES (2, 'normal', NULL, 'gotaga');
+INSERT INTO ChatRoom VALUES (3, 'slow', 40, 'ponce');
+INSERT INTO ChatRoom VALUES (4, 'slow', 5, 'tarik');
+INSERT INTO ChatRoom VALUES (5, 'normal', NULL, 'noway4u_sir');
+INSERT INTO ChatRoom VALUES (6, 'normal', NULL, 'emilyywang');
+INSERT INTO ChatRoom VALUES (7, 'normal', NULL, 'jltomy');
+INSERT INTO ChatRoom VALUES (8, 'slow', 5, 'baitybait');
+INSERT INTO ChatRoom VALUES (9, 'normal', NULL, 'disguisedtoast');
+INSERT INTO ChatRoom VALUES (10, 'normal', NULL, 'elajjaz');
+INSERT INTO ChatRoom VALUES (11, 'normal', NULL, 'kant');
+INSERT INTO ChatRoom VALUES (12, 'slow', 30, 'tangotek');
