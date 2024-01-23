@@ -1,4 +1,5 @@
 import json
+import os
 from random import randint, shuffle, random, choice
 from faker import Faker
 from datetime import datetime
@@ -22,6 +23,12 @@ def parse_date(date):
 
 def sqlfy_date(date):
     return date.strftime('%Y-%m-%d %H:%M:%S')
+
+def create_dirs():
+    if not os.path.exists("population_files"):
+        os.makedirs("population_files")
+    if not os.path.exists("population_files/sql"):
+        os.makedirs("population_files/sql")
 
 def write_accounts():
     users_path = 'population_files/json/users.json'
@@ -275,8 +282,11 @@ def write_messages():
     streams_path = 'population_files/json/filtered_streams.json'
     sql_path = 'population_files/sql/messages.sql'
     
-    with open(messages_path, 'r') as messages_file:
-        streamer_messages = json.load(messages_file)
+    if not os.path.isfile(messages_path):
+        streamer_messages = {}
+    else:
+        with open(messages_path, 'r') as messages_file:
+            streamer_messages = json.load(messages_file)
     with open(streamers_path, 'r') as streamers_file:
         streamers = json.load(streamers_file)
     with open(view_dump_path, 'r') as view_dump:
@@ -306,8 +316,11 @@ def write_emoticons():
     streamer_messages_path = 'population_files/json/chat_messages.json'
     sql_path = 'population_files/sql/emoticons.sql'
     
-    with open(streamer_messages_path, 'r') as streamer_messages_file:
-        streamer_messages = json.load(streamer_messages_file)
+    if not os.path.isfile(streamer_messages_path):
+        streamer_messages = {}
+    else:
+        with open(streamer_messages_path, 'r') as streamer_messages_file:
+            streamer_messages = json.load(streamer_messages_file)
         
     emoticons = {emoticon for messages in streamer_messages.values() for message in messages for i, emoticon in enumerate(message.split(':')) if i % 2 == 1}
         
@@ -319,8 +332,11 @@ def write_contains():
     streamer_messages_path = 'population_files/json/chat_messages.json'
     sql_path = 'population_files/sql/contains.sql'
     
-    with open(streamer_messages_path, 'r') as streamer_messages_file:
-        streamer_messages = json.load(streamer_messages_file)
+    if not os.path.isfile(streamer_messages_path):
+        streamer_messages = {}
+    else:
+        with open(streamer_messages_path, 'r') as streamer_messages_file:
+            streamer_messages = json.load(streamer_messages_file)
         
     with open(sql_path, 'w') as sql_file:
         id = 1
@@ -332,6 +348,7 @@ def write_contains():
                 id += 1
                 
 def main():
+    create_dirs()
     write_accounts()
     write_users()
     write_streamers()

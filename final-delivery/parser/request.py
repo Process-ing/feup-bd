@@ -1,13 +1,19 @@
 import requests
 import json
-from sys import argv;
+from sys import argv
+import os
 
 token = '[INSERT TOKEN HERE]'
 headers = {
     'Authorization': f'Bearer {token}',
     'Client-Id': '[INSERT CLIENT ID HERE]',
 }
-        
+
+def create_dirs():
+    if not os.path.exists("population_files"):
+        os.makedirs("population_files")
+    if not os.path.exists("population_files/json"):
+        os.makedirs("population_files/json")
 
 def get_streams():
     path = "population_files/json/streams.json"
@@ -98,6 +104,7 @@ def main():
         print("Usage: python request.py [ALL | [STREAM | STREAMCATEGORIES | ACCOUNTS | CHATS]...]")
         exit(1)
     if argv[1] == "ALL":
+        create_dirs()
         get_streams()
         choose_and_request_accounts()
         get_chat_rooms()
@@ -105,10 +112,13 @@ def main():
     
     for arg in argv[1:]:
         if arg == "STREAMS":
+            create_dirs()
             get_streams()
         elif arg == "ACCOUNTS":
+            create_dirs()
             choose_and_request_accounts()
         elif arg == "CHATS":
+            create_dirs()
             get_chat_rooms()
         else:
             print("request.py:", arg, "is not a valid argument")
